@@ -37,5 +37,16 @@ function err = ctr_error (approx, exact)
 % 1-norm as a metric on $\R$ to calculate error of approximation
 err = abs(approx-exact);
 
+endfunction
+
+% integrand.m returns function values of a specified integrand $f\colon\R\to\R$
+% given a vector of domain values X. If X is a vector of size n, then F is
+% also a vector of size n.
+
+function F = integrand (X)
+
+% Vectorized implementation of value passing from X to the error function
+% integrand $e^{-x^2}\colon\R\to\left\{x\geq 0\right\}$
+F = exp(-X.^2);
 
 endfunction
