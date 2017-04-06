@@ -1,8 +1,6 @@
-## Copyright (C) 2016 Francisco Chima Sanchez
-##
 ## Author: Francisco Chima Sanchez
 ## Created: 2016-09-27
-## Last Modified: 2016-09-27
+## Last Modified: 2017-04-05
 
 % main.m is the parent function for an implementation of a vectorized version
 % of the Composite Trapezoidal Rule used to approximate the definite integral
