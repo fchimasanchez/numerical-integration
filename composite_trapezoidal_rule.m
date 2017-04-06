@@ -39,6 +39,43 @@ err = abs(approx-exact);
 
 endfunction
 
+% train_ctr.m calls composite_trapezoidal_rule repeatedly in an effort to
+% reduce the approximation error to below a specified threshold eps.
+% This is accomplished by more and more finely partitioning $[a,b]$ and
+% calculating the approximation error in every iteration.
+%
+% This function returns the step size H that satisfies the tolerance 
+% requirement. It also plots the error as a function of number of nodes.
+
+function H = train_ctr (a, b, exact, eps)
+
+% Initialize important values
+length = b - a; % Length of interval
+h = length./10; % Step size
+X = a:h:b; % Vector holding partition values
+hVec = h; % Initializes vector of step sizes
+E = 0; % Set error to zero
+
+% Trains CTR to reduce the step size until the error is less than some accepted tolerance
+approx = composite_trapezoidal_rule(X);
+err = ctr_error(approx,exact);
+
+while err > eps,
+   h = 0.5*h; % Reduce step size in half
+   hVec = [hVec; h]; 
+   X = a:h:b; % Reset partition of interval
+   approx = composite_trapezoidal_rule(X);
+   err = ctr_error(approx,exact);
+   E = [E; err];
+end;
+
+fprintf("Step size   Error\n");
+P = [hVec E];
+disp(P)
+H = h;
+
+endfunction
+
 % integrand.m returns function values of a specified integrand $f\colon\R\to\R$
 % given a vector of domain values X. If X is a vector of size n, then F is
 % also a vector of size n.
