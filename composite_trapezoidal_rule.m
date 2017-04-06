@@ -27,3 +27,15 @@ F(n) = 0.5.*F(n);
 ctr = h.*sum(F);
 
 endfunction
+
+% ctr_error.m computes the approximation error between the output of CTR
+% and the actual analytical value of the integral. Here, I use the basic
+% 1-norm on $\R$, $\|a-b\|=|a-b|$, to determine the error.
+
+function err = ctr_error (approx, exact)
+
+% 1-norm as a metric on $\R$ to calculate error of approximation
+err = abs(approx-exact);
+
+
+endfunction
